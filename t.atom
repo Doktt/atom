@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<feed
+xmlns="http://www.w3.org/2005/Atom"
+xmlns:thr="http://purl.org/syndication/thread/1.0"><title>A few usability question about git diff --cached</title><link
+rel="alternate"
+type="text/html"
+href="https://lore.kernel.org/git/"/><link
+rel="self"
+href="https://lore.kernel.org/git/20071004125641.GE15339@genesis.frugalware.org/t.atom"/><id>urn:uuid:c48afbf9-b965-7034-d55b-36d29d81ec7c</id><updated>2020-03-24T09:35:33Z</updated><entry><author><name>Paolo Ciarrocchi</name><email>paolo.ciarrocchi@gmail.com</email></author><title>A few usability question about git diff --cached</title><updated>2007-10-04T12:27:54Z</updated><link
+href="https://lore.kernel.org/git/4d8e3fd30710040527j61152b2dh1b073504ba19d490@mail.gmail.com/"/><id>urn:uuid:5dd723e4-085a-ef51-e028-cccdaeb80b0e</id><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">Hi all,
+I&#39;m having and interesting discussion with an happy mercurial users
+which started reading the git documentation. He raised aquestion that
+I&#39;m not able to answer:
+
+<span
+class="q">&gt; $ git diff --cached
+&gt;
+&gt; (Without &#8212;cached, git-diff(1) will show you any changes that you&#39;ve
+&gt; made but not yet added to the index.) You can also get a brief summary
+&gt; of the situation with git-status(1):
+</span>
+Why do we have the option &#34;--cached&#34; and not &#34;--index&#34;?
+
+I believe that, just reading the documentation, is not very easy to
+fully understand the role of the index and then we have an option
+&#34;--cached&#34; that refers to the index.
+Is it a good idea to add and document an option &#34;--index&#34; and remove
+from the doc the option &#34;--cached&#34;?
+
+Thanks.
+
+Regards,
+-- 
+Paolo
+<a
+href="http://paolo.ciarrocchi.googlepages.com/">http://paolo.ciarrocchi.googlepages.com/</a>
+</pre></div></content></entry><entry><author><name>Wincent Colaiuta</name><email>win@wincent.com</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T12:54:48Z</updated><link
+href="https://lore.kernel.org/git/5ACC5CA7-8314-4035-94EC-190138A25EBD@wincent.com/"/><id>urn:uuid:71b30632-3738-5c69-54ce-020b0564287d</id><thr:in-reply-to
+ref="urn:uuid:5dd723e4-085a-ef51-e028-cccdaeb80b0e"
+href="https://lore.kernel.org/git/4d8e3fd30710040527j61152b2dh1b073504ba19d490@mail.gmail.com/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">El 4/10/2007, a las 14:27, Paolo Ciarrocchi escribi&#243;:
+
+<span
+class="q">&gt; Hi all,
+&gt; I&#39;m having and interesting discussion with an happy mercurial users
+&gt; which started reading the git documentation. He raised aquestion that
+&gt; I&#39;m not able to answer:
+&gt;
+&gt;&gt; $ git diff --cached
+&gt;&gt;
+&gt;&gt; (Without &#8212;cached, git-diff(1) will show you any changes that you&#39;ve
+&gt;&gt; made but not yet added to the index.) You can also get a brief  
+&gt;&gt; summary
+&gt;&gt; of the situation with git-status(1):
+&gt;
+&gt; Why do we have the option &#34;--cached&#34; and not &#34;--index&#34;?
+</span>
+I am not an &#34;old timer&#34;, but I believe that it&#39;s because what we now  
+know as &#34;the index&#34; was original called &#34;the cache&#34;. See:
+
+&lt;<a
+href="http://git.or.cz/gitwiki/GitHistory">http://git.or.cz/gitwiki/GitHistory</a>&gt;
+
+You&#39;re probably right that the option name is confusing, I guess  
+changing it to &#34;--index&#34; would be a good idea, continuing to support  
+&#34;--cached&#34; but marking it as deprecated before finally removing it at  
+some point in the future.
+
+Cheers,
+Wincent
+</pre></div></content></entry><entry><author><name>Miklos Vajna</name><email>vmiklos@frugalware.org</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T12:56:53Z</updated><link
+href="https://lore.kernel.org/git/20071004125641.GE15339@genesis.frugalware.org/"/><id>urn:uuid:7949e547-5fb9-bd2b-dba7-5ebf7ec8ff52</id><thr:in-reply-to
+ref="urn:uuid:5dd723e4-085a-ef51-e028-cccdaeb80b0e"
+href="https://lore.kernel.org/git/4d8e3fd30710040527j61152b2dh1b073504ba19d490@mail.gmail.com/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap"><a
+href="https://lore.kernel.org/git/20071004125641.GE15339@genesis.frugalware.org/1-a.txt">[-- Attachment #1: Type: text/plain, Size: 375 bytes --]</a>
+
+On Thu, Oct 04, 2007 at 02:27:41PM +0200, Paolo Ciarrocchi &lt;paolo.ciarrocchi@gmail.com&gt; wrote:
+<span
+class="q">&gt; Why do we have the option &#34;--cached&#34; and not &#34;--index&#34;?
+</span>
+according to glossary.txt, &#39;cache&#39; is an obsolete for &#39;index&#39;. probably
+this is the reason
+
+probably cache.h will be never renamed to index.h, i don&#39;t know if diff
+--cached will be ever renamed to diff --index
+
+- VMiklos
+
+<a
+href="https://lore.kernel.org/git/20071004125641.GE15339@genesis.frugalware.org/2-a.bin">[-- Attachment #2: Type: application/pgp-signature, Size: 189 bytes --]</a>
+</pre></div></content></entry><entry><author><name>Paolo Ciarrocchi</name><email>paolo.ciarrocchi@gmail.com</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T13:10:56Z</updated><link
+href="https://lore.kernel.org/git/4d8e3fd30710040610m49521fb7ld8f95043c945bf94@mail.gmail.com/"/><id>urn:uuid:0255053a-3328-5eb0-1479-00b38102057e</id><thr:in-reply-to
+ref="urn:uuid:7949e547-5fb9-bd2b-dba7-5ebf7ec8ff52"
+href="https://lore.kernel.org/git/20071004125641.GE15339@genesis.frugalware.org/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">On 10/4/07, Miklos Vajna &lt;vmiklos@frugalware.org&gt; wrote:
+<span
+class="q">&gt; On Thu, Oct 04, 2007 at 02:27:41PM +0200, Paolo Ciarrocchi &lt;paolo.ciarrocchi@gmail.com&gt; wrote:
+&gt; &gt; Why do we have the option &#34;--cached&#34; and not &#34;--index&#34;?
+&gt;
+&gt; according to glossary.txt, &#39;cache&#39; is an obsolete for &#39;index&#39;. probably
+&gt; this is the reason
+&gt;
+&gt; probably cache.h will be never renamed to index.h, i don&#39;t know if diff
+&gt; --cached will be ever renamed to diff --index
+</span>
+Believe me, for a GIT newbie git --cached is confusing.
+
+That user started reading &#34;A tutorial introduction to git (for version
+1.5.1 or newer)&#34;,
+after a cuple of minutes of reading he reached &#34;Making changes&#34; saw:
+
+&#34; You are now ready to commit. You can see what is about to be
+committed using git-diff(1) with the &#8212;cached option:
+
+$ git diff --cached &#34;
+
+$ git diff --index sound a lof more consistent with the general documentation.
+
+Regards,
+-- 
+Paolo
+<a
+href="http://paolo.ciarrocchi.googlepages.com/">http://paolo.ciarrocchi.googlepages.com/</a>
+<a
+href="http://ubuntista.blogspot.com">http://ubuntista.blogspot.com</a>
+</pre></div></content></entry><entry><author><name>Junio C Hamano</name><email>gitster@pobox.com</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T13:15:17Z</updated><link
+href="https://lore.kernel.org/git/7vy7ej9g38.fsf@gitster.siamese.dyndns.org/"/><id>urn:uuid:4f151660-3b2b-4a9e-bc0a-bdb4af88eb77</id><thr:in-reply-to
+ref="urn:uuid:7949e547-5fb9-bd2b-dba7-5ebf7ec8ff52"
+href="https://lore.kernel.org/git/20071004125641.GE15339@genesis.frugalware.org/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">Miklos Vajna &lt;vmiklos@frugalware.org&gt; writes:
+
+<span
+class="q">&gt; On Thu, Oct 04, 2007 at 02:27:41PM +0200, Paolo Ciarrocchi &lt;paolo.ciarrocchi@gmail.com&gt; wrote:
+&gt;&gt; Why do we have the option &#34;--cached&#34; and not &#34;--index&#34;?
+&gt;
+&gt; according to glossary.txt, &#39;cache&#39; is an obsolete for &#39;index&#39;. probably
+&gt; this is the reason
+&gt;
+&gt; probably cache.h will be never renamed to index.h, i don&#39;t know if diff
+&gt; --cached will be ever renamed to diff --index
+</span>
+Probably never.
+
+Some commands support both --index and --cached and have
+different meanings.  For them,
+
+ * --index means work on both index and work tree;
+ * --cached means work only on index and ignore work tree.
+
+In the case of &#34;diff --cached&#34;, the latter is exactly what&#39;s
+happening.  We do not say &#34;git diff-index --index $commit&#34;
+because &#34;git diff-index&#34; (and by extension, when you give only
+one commit to &#34;git diff&#34; as parameter) is all about a commit vs
+your uncommitted changes, so having you say &#34;--index&#34; is just
+silly.  &#34;git diff --cached&#34; is just a shorthand for &#34;git diff
+--cached HEAD&#34;.  Because --cached would make sense to no other
+form of diff, its presense by definition means you are talking
+about the one-tree form of diff i.e. compare a commit with your
+uncommitted changes.
+
+An example of a command that supports both is &#34;git apply&#34;.
+Actually it is an extreme case in that it allows &#34;no index&#34; form
+of operation, so it has &#34;git apply&#34;, &#34;git apply --cached&#34;, and
+&#34;git apply --index&#34;.  The --cached would only apply to index
+without touching work tree, the --index would apply to both
+index and work tree.
+</pre></div></content></entry><entry><author><name>Paolo Ciarrocchi</name><email>paolo.ciarrocchi@gmail.com</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T13:39:18Z</updated><link
+href="https://lore.kernel.org/git/4d8e3fd30710040639x62d7b9cbr688aca141849212c@mail.gmail.com/"/><id>urn:uuid:cf2203e5-ef80-fe65-f326-cab5358ac31b</id><thr:in-reply-to
+ref="urn:uuid:4f151660-3b2b-4a9e-bc0a-bdb4af88eb77"
+href="https://lore.kernel.org/git/7vy7ej9g38.fsf@gitster.siamese.dyndns.org/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">On 10/4/07, Junio C Hamano &lt;gitster@pobox.com&gt; wrote:
+<span
+class="q">&gt; Miklos Vajna &lt;vmiklos@frugalware.org&gt; writes:
+&gt;
+&gt; &gt; On Thu, Oct 04, 2007 at 02:27:41PM +0200, Paolo Ciarrocchi &lt;paolo.ciarrocchi@gmail.com&gt; wrote:
+&gt; &gt;&gt; Why do we have the option &#34;--cached&#34; and not &#34;--index&#34;?
+&gt; &gt;
+&gt; &gt; according to glossary.txt, &#39;cache&#39; is an obsolete for &#39;index&#39;. probably
+&gt; &gt; this is the reason
+&gt; &gt;
+&gt; &gt; probably cache.h will be never renamed to index.h, i don&#39;t know if diff
+&gt; &gt; --cached will be ever renamed to diff --index
+&gt;
+&gt; Probably never.
+</span>
+Ouch!
+
+<span
+class="q">&gt; Some commands support both --index and --cached and have
+&gt; different meanings.  For them,
+&gt;
+&gt;  * --index means work on both index and work tree;
+&gt;  * --cached means work only on index and ignore work tree.
+&gt;
+&gt; In the case of &#34;diff --cached&#34;, the latter is exactly what&#39;s
+&gt; happening.  We do not say &#34;git diff-index --index $commit&#34;
+&gt; because &#34;git diff-index&#34; (and by extension, when you give only
+&gt; one commit to &#34;git diff&#34; as parameter) is all about a commit vs
+&gt; your uncommitted changes, so having you say &#34;--index&#34; is just
+&gt; silly.  &#34;git diff --cached&#34; is just a shorthand for &#34;git diff
+&gt; --cached HEAD&#34;.  Because --cached would make sense to no other
+&gt; form of diff, its presense by definition means you are talking
+&gt; about the one-tree form of diff i.e. compare a commit with your
+&gt; uncommitted changes.
+</span>
+I see. But the problem is real. If we cannot solve the problem
+changing the code of git we&#39;ll need to avoid this kind of
+misunderstanding having &#34;better&#34; documentation.
+
+As soon as I&#39;ll find some spare time I&#39;ll propose a patch to &#34;A
+tutorial introduction to git (for version 1.5.1 or newer)&#34;.
+
+Thanks!
+
+Regards,
+-- 
+Paolo
+<a
+href="http://paolo.ciarrocchi.googlepages.com/">http://paolo.ciarrocchi.googlepages.com/</a>
+<a
+href="http://ubuntista.blogspot.com">http://ubuntista.blogspot.com</a>
+</pre></div></content></entry><entry><author><name>Wincent Colaiuta</name><email>win@wincent.com</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T14:10:21Z</updated><link
+href="https://lore.kernel.org/git/5159468E-C263-4F7B-AEBA-8392C4742C47@wincent.com/"/><id>urn:uuid:bffb5ce1-d2f6-db5e-6495-17ff88c96698</id><thr:in-reply-to
+ref="urn:uuid:4f151660-3b2b-4a9e-bc0a-bdb4af88eb77"
+href="https://lore.kernel.org/git/7vy7ej9g38.fsf@gitster.siamese.dyndns.org/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">El 4/10/2007, a las 15:14, Junio C Hamano escribi&#243;:
+
+<span
+class="q">&gt; Miklos Vajna &lt;vmiklos@frugalware.org&gt; writes:
+&gt;
+&gt;&gt; On Thu, Oct 04, 2007 at 02:27:41PM +0200, Paolo Ciarrocchi  
+&gt;&gt; &lt;paolo.ciarrocchi@gmail.com&gt; wrote:
+&gt;&gt;&gt; Why do we have the option &#34;--cached&#34; and not &#34;--index&#34;?
+&gt;&gt;
+&gt;&gt; according to glossary.txt, &#39;cache&#39; is an obsolete for &#39;index&#39;.  
+&gt;&gt; probably
+&gt;&gt; this is the reason
+&gt;&gt;
+&gt;&gt; probably cache.h will be never renamed to index.h, i don&#39;t know if  
+&gt;&gt; diff
+&gt;&gt; --cached will be ever renamed to diff --index
+&gt;
+&gt; Probably never.
+&gt;
+&gt; Some commands support both --index and --cached and have
+&gt; different meanings.  For them,
+&gt;
+&gt;  * --index means work on both index and work tree;
+&gt;  * --cached means work only on index and ignore work tree.
+</span>
+Look at that with fresh eyes and you can see how it makes very little  
+sense.
+
+The option named &#34;--index&#34; works on more than the index and the  
+option named &#34;--cached&#34; works only on the index. This sounds back-to- 
+front.
+
+IMO, better names would be:
+
+--index : means work only on the index (and ignore the work tree);  
+ie. it means what it says
+
+--index-and-worktree : it also means what it says
+
+The latter is more keystrokes but it&#39;s clearer.
+
+Having said all this, I recognize that the likelihood of these option  
+names ever being changed is close to zero. Like Paolo says in his  
+other email, the documentation could be made clearer to avoid  
+possible confusion.
+
+Cheers,
+Wincent
+</pre></div></content></entry><entry><author><name>Johannes Schindelin</name><email>Johannes.Schindelin@gmx.de</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T14:24:59Z</updated><link
+href="https://lore.kernel.org/git/Pine.LNX.4.64.0710041534000.4174@racer.site/"/><id>urn:uuid:86e3b8de-d289-ce0c-19cc-ffab496e721e</id><thr:in-reply-to
+ref="urn:uuid:4f151660-3b2b-4a9e-bc0a-bdb4af88eb77"
+href="https://lore.kernel.org/git/7vy7ej9g38.fsf@gitster.siamese.dyndns.org/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">Hi,
+
+On Thu, 4 Oct 2007, Junio C Hamano wrote:
+
+<span
+class="q">&gt;  * --cached means work only on index and ignore work tree.
+</span>
+I guess I could live with &#34;--staged&#34; as a synonym for &#34;--cached&#34; (and 
+maybe deprecating &#34;--cached&#34;).
+
+Ciao,
+Dscho
+</pre></div></content></entry><entry><author><name>Junio C Hamano</name><email>gitster@pobox.com</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T14:40:45Z</updated><link
+href="https://lore.kernel.org/git/7vhcl79c4l.fsf@gitster.siamese.dyndns.org/"/><id>urn:uuid:66d00037-332a-54ea-0342-83e1140d098f</id><thr:in-reply-to
+ref="urn:uuid:86e3b8de-d289-ce0c-19cc-ffab496e721e"
+href="https://lore.kernel.org/git/Pine.LNX.4.64.0710041534000.4174@racer.site/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">Johannes Schindelin &lt;Johannes.Schindelin@gmx.de&gt; writes:
+
+<span
+class="q">&gt; On Thu, 4 Oct 2007, Junio C Hamano wrote:
+&gt;
+&gt;&gt;  * --cached means work only on index and ignore work tree.
+&gt;
+&gt; I guess I could live with &#34;--staged&#34; as a synonym for &#34;--cached&#34; (and 
+&gt; maybe deprecating &#34;--cached&#34;).
+</span>
+A handy mnemonic might be:
+
+ * --index means work work tree through the index.  Once you get
+   git, this is natural as you would not interact with files in
+   the work tree that is not known to the index.
+
+ * --cached means work only on the cached information in index.
+
+Any change like swapping them or renaming --cached to --index
+and making something else to mean what --index always meant will
+break existing setups and people&#39;s scripts.  Won&#39;t happen.
+
+Giving them synonyms without deprecation is a viable option, if
+necessary.  I do not however see the need yet.  A few people who
+haven&#39;t learned the lingo of the land yet can worry about
+possible confusion, but I do not think that &#34;worry&#34; itself does
+not count as real need.
+</pre></div></content></entry><entry><author><name>Matthieu Moy</name><email>Matthieu.Moy@imag.fr</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T14:47:20Z</updated><link
+href="https://lore.kernel.org/git/vpqtzp7ndn3.fsf@bauges.imag.fr/"/><id>urn:uuid:9f9f5902-dc3d-372f-9cef-16d5557c0eeb</id><thr:in-reply-to
+ref="urn:uuid:86e3b8de-d289-ce0c-19cc-ffab496e721e"
+href="https://lore.kernel.org/git/Pine.LNX.4.64.0710041534000.4174@racer.site/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">Johannes Schindelin &lt;Johannes.Schindelin@gmx.de&gt; writes:
+
+<span
+class="q">&gt; Hi,
+&gt;
+&gt; On Thu, 4 Oct 2007, Junio C Hamano wrote:
+&gt;
+&gt;&gt;  * --cached means work only on index and ignore work tree.
+&gt;
+&gt; I guess I could live with &#34;--staged&#34; as a synonym for &#34;--cached&#34; (and 
+&gt; maybe deprecating &#34;--cached&#34;).
+</span>
+It makes more sense to me.
+
+For me, a &#34;cache&#34; is a fast-access copy of something, that I can
+rebuild at any time. Cache should be only a matter of performance, if
+the &#34;cache&#34; for an application changes its functionality, it means the
+cache has been too optimistic. Git&#39;s index is not that, &#34;git add&#34;
+means &#34;add this to the index&#34;, which itself means &#34;put that in the
+list of things to commit&#34;, and not &#34;get a copy of that to work faster
+with it&#34;.
+
+So, to me (non-native speaker), &#34;index&#34; doesn&#39;t mean much, &#34;cache&#34; is
+worse, it means something which isn&#39;t correct, and &#34;staging area&#34;
+means the right thing (but is longer to type). For example, I
+understand immediately when git-gui talks me about staging/unstaging
+changes ;-).
+
+-- 
+Matthieu
+</pre></div></content></entry><entry><author><name>David Kastrup</name><email>dak@gnu.org</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T15:07:27Z</updated><link
+href="https://lore.kernel.org/git/86hcl70wep.fsf@lola.quinscape.zz/"/><id>urn:uuid:47b16ea6-d9f9-013a-d548-6cd8c58de56e</id><thr:in-reply-to
+ref="urn:uuid:66d00037-332a-54ea-0342-83e1140d098f"
+href="https://lore.kernel.org/git/7vhcl79c4l.fsf@gitster.siamese.dyndns.org/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">Junio C Hamano &lt;gitster@pobox.com&gt; writes:
+
+<span
+class="q">&gt;  * --index means work work tree through the index.  Once you get
+&gt;    git, this is natural as you would not interact with files in
+&gt;    the work tree that is not known to the index.
+&gt;
+&gt;  * --cached means work only on the cached information in index.
+</span>
+That is a rather shaky relation.
+
+<span
+class="q">&gt; Giving them synonyms without deprecation is a viable option, if
+&gt; necessary.  I do not however see the need yet.  A few people who
+&gt; haven&#39;t learned the lingo of the land yet can worry about possible
+&gt; confusion, but I do not think that &#34;worry&#34; itself does not count as
+&gt; real need.
+</span>
+The &#34;lingo of the land&#34; as documented in the manuals no longer uses
+the term &#34;cache&#34; or &#34;cached&#34; as something with an official meaning.
+
+So the current state of affairs does not really look overly convincing
+with regard to consistency.
+
+-- 
+David Kastrup
+</pre></div></content></entry><entry><author><name>Wincent Colaiuta</name><email>win@wincent.com</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T15:55:51Z</updated><link
+href="https://lore.kernel.org/git/AB1F1C3D-DB5D-4ADB-ACA0-776508FAE97F@wincent.com/"/><id>urn:uuid:facc386a-16f7-3096-653f-bc49babe0853</id><thr:in-reply-to
+ref="urn:uuid:86e3b8de-d289-ce0c-19cc-ffab496e721e"
+href="https://lore.kernel.org/git/Pine.LNX.4.64.0710041534000.4174@racer.site/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">El 4/10/2007, a las 16:34, Johannes Schindelin escribi&#243;:
+
+<span
+class="q">&gt; On Thu, 4 Oct 2007, Junio C Hamano wrote:
+&gt;
+&gt;&gt;  * --cached means work only on index and ignore work tree.
+&gt;
+&gt; I guess I could live with &#34;--staged&#34; as a synonym for &#34;--cached&#34; (and
+&gt; maybe deprecating &#34;--cached&#34;).
+</span>
+Good idea. I think that would partly address the consistency  
+problems, be more accessible to new users, and easier to explain in  
+the documentation.
+
+Not that it makes much difference to me personally. One of the first  
+things I did when I started using Git was set up two shell aliases  
+(not Git aliases) seeing as looking at my staged and unstaged changes  
+is for me such an extremely frequent operation:
+
+   alias staged=&#39;git diff --cached&#39;
+   alias unstaged=&#39;git diff&#39;
+
+Cheers,
+Wincent
+</pre></div></content></entry><entry><author><name>J. Bruce Fields</name><email>bfields@fieldses.org</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T15:52:37Z</updated><link
+href="https://lore.kernel.org/git/20071004155147.GA17487@fieldses.org/"/><id>urn:uuid:3dd2b2e8-3cf4-495d-50cb-fe7b4bcda4fe</id><thr:in-reply-to
+ref="urn:uuid:9f9f5902-dc3d-372f-9cef-16d5557c0eeb"
+href="https://lore.kernel.org/git/vpqtzp7ndn3.fsf@bauges.imag.fr/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">On Thu, Oct 04, 2007 at 04:44:00PM +0200, Matthieu Moy wrote:
+<span
+class="q">&gt; Johannes Schindelin &lt;Johannes.Schindelin@gmx.de&gt; writes:
+&gt; 
+&gt; &gt; Hi,
+&gt; &gt;
+&gt; &gt; On Thu, 4 Oct 2007, Junio C Hamano wrote:
+&gt; &gt;
+&gt; &gt;&gt;  * --cached means work only on index and ignore work tree.
+&gt; &gt;
+&gt; &gt; I guess I could live with &#34;--staged&#34; as a synonym for &#34;--cached&#34; (and 
+&gt; &gt; maybe deprecating &#34;--cached&#34;).
+&gt; 
+&gt; It makes more sense to me.
+&gt; 
+&gt; For me, a &#34;cache&#34; is a fast-access copy of something, that I can
+&gt; rebuild at any time. Cache should be only a matter of performance, if
+&gt; the &#34;cache&#34; for an application changes its functionality, it means the
+&gt; cache has been too optimistic. Git&#39;s index is not that, &#34;git add&#34;
+&gt; means &#34;add this to the index&#34;, which itself means &#34;put that in the
+&gt; list of things to commit&#34;, and not &#34;get a copy of that to work faster
+&gt; with it&#34;.
+</span>
+Yes, the index differs from the work tree or HEAD temporarily, but most
+of it&#39;s life it&#39;s just a fast-access copy of something that you can
+rebuild at any time.
+
+So it&#39;s partly a &#34;cache&#34;, partly a &#34;staging area&#34;, and &#34;index&#34; is as
+good a term for it as any.
+
+--b.
+</pre></div></content></entry><entry><author><name>Matthieu Moy</name><email>Matthieu.Moy@imag.fr</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T16:05:51Z</updated><link
+href="https://lore.kernel.org/git/vpq8x6ix3zm.fsf@bauges.imag.fr/"/><id>urn:uuid:06969c40-cec8-fe34-c227-c74d5a5ebc78</id><thr:in-reply-to
+ref="urn:uuid:3dd2b2e8-3cf4-495d-50cb-fe7b4bcda4fe"
+href="https://lore.kernel.org/git/20071004155147.GA17487@fieldses.org/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">&#34;J. Bruce Fields&#34; &lt;bfields@fieldses.org&gt; writes:
+
+<span
+class="q">&gt; Yes, the index differs from the work tree or HEAD temporarily, 
+</span>
+Temporarily, yes, but the _point_ of having it is to have it differ
+from HEAD (otherwise, you can&#39;t create a new revision), and from the
+tree (otherwise, index-related commands are useless).
+
+The stat-information, and sha1sum are actually a cache, but they don&#39;t
+have to be user-visible, except for speed. &#34;diff --cached&#34; has nothing
+to do with the stat information for the user.
+
+-- 
+Matthieu
+</pre></div></content></entry><entry><author><name>J. Bruce Fields</name><email>bfields@fieldses.org</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-04T16:20:01Z</updated><link
+href="https://lore.kernel.org/git/20071004161935.GC17487@fieldses.org/"/><id>urn:uuid:8896caa1-2f5f-0c1c-4c5e-8f7bbd063520</id><thr:in-reply-to
+ref="urn:uuid:06969c40-cec8-fe34-c227-c74d5a5ebc78"
+href="https://lore.kernel.org/git/vpq8x6ix3zm.fsf@bauges.imag.fr/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">On Thu, Oct 04, 2007 at 06:02:21PM +0200, Matthieu Moy wrote:
+<span
+class="q">&gt; &#34;J. Bruce Fields&#34; &lt;bfields@fieldses.org&gt; writes:
+&gt; 
+&gt; &gt; Yes, the index differs from the work tree or HEAD temporarily, 
+&gt; 
+&gt; Temporarily, yes, but the _point_ of having it is to have it differ
+&gt; from HEAD (otherwise, you can&#39;t create a new revision), and from the
+&gt; tree (otherwise, index-related commands are useless).
+</span>
+Getting a nearly-instantaneous &#34;git diff&#34; would be sufficiently
+important to justify its existance on its own, so I think you&#39;re
+overstating the case.
+
+<span
+class="q">&gt; The stat-information, and sha1sum are actually a cache, but they don&#39;t
+&gt; have to be user-visible, except for speed.
+</span>
+That&#39;s a big exception.--b.
+
+<span
+class="q">&gt; &#34;diff --cached&#34; has nothing to do with the stat information for the
+&gt; user.
+</span></pre></div></content></entry><entry><author><name>David Tweed</name><email>david.tweed@gmail.com</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-05T05:29:13Z</updated><link
+href="https://lore.kernel.org/git/e1dab3980710042222u3e1fc21dtf4b90056fb36eaf0@mail.gmail.com/"/><id>urn:uuid:4823157f-4fe4-754f-c88c-afc5f63ac02c</id><thr:in-reply-to
+ref="urn:uuid:9f9f5902-dc3d-372f-9cef-16d5557c0eeb"
+href="https://lore.kernel.org/git/vpqtzp7ndn3.fsf@bauges.imag.fr/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">On 10/4/07, Matthieu Moy &lt;Matthieu.Moy@imag.fr&gt; wrote:
+<span
+class="q">&gt; Johannes Schindelin &lt;Johannes.Schindelin@gmx.de&gt; writes:
+&gt; It makes more sense to me.
+&gt;
+&gt; For me, a &#34;cache&#34; is a fast-access copy of something, that I can
+&gt; rebuild at any time. Cache should be only a matter of performance, if
+&gt; the &#34;cache&#34; for an application changes its functionality, it means the
+&gt; cache has been too optimistic. Git&#39;s index is not that, &#34;git add&#34;
+&gt; means &#34;add this to the index&#34;, which itself means &#34;put that in the
+&gt; list of things to commit&#34;, and not &#34;get a copy of that to work faster
+&gt; with it&#34;.
+</span>
+Just to say this interpretation is also the natural interpretation I
+have for the term &#34;cached&#34;, and it confused me no end when I was first
+learning about git that the index was referred to as a cache. To be
+fair, git the documentation was in flux at that time and it&#39;s now
+referred too as a cache in very few places now.
+
+An example of the kind of thing I have to think carefully about even
+now, Junio said in a different mail:
+
+&#34;--cached means work only on the &#34;cached information in index.&#34;
+
+If I understand correctly, the term &#34;cached information in index&#34; is
+more correctly &#34;stored information in index&#34; (or perhaps more
+technically &#34;staged information in index&#34;) since there may be
+information in there which isn&#39;t a cache because it&#39;s no longer
+present anywhere else (ie, not in a commit yet but also changed in the
+working tree).
+
+It&#39;s not a big thing, but the usage of cached in git still quite confuses me.
+
+-- 
+cheers, dave tweed__________________________
+david.tweed@gmail.com
+Rm 124, School of Systems Engineering, University of Reading.
+&#34;we had no idea that when we added templates we were adding a Turing-
+complete compile-time language.&#34; -- C++ standardisation committee
+</pre></div></content></entry><entry><author><name>Miles Bader</name><email>miles.bader@necel.com</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-05T05:59:58Z</updated><link
+href="https://lore.kernel.org/git/buoejga14qg.fsf@dhapc248.dev.necel.com/"/><id>urn:uuid:68f739cb-52d8-fd7b-a622-a459ee218aa6</id><thr:in-reply-to
+ref="urn:uuid:71b30632-3738-5c69-54ce-020b0564287d"
+href="https://lore.kernel.org/git/5ACC5CA7-8314-4035-94EC-190138A25EBD@wincent.com/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">Wincent Colaiuta &lt;win@wincent.com&gt; writes:
+<span
+class="q">&gt; You&#39;re probably right that the option name is confusing, I guess  
+&gt; changing it to &#34;--index&#34; would be a good idea, continuing to support  
+&gt; &#34;--cached&#34; but marking it as deprecated before finally removing it at  
+&gt; some point in the future.
+</span>
+Personally all I want is a short-option alias for --cached!
+
+Hopefully something easily type-able (not uppercase)...
+
+-Miles
+
+-- 
+Americans are broad-minded people.  They&#39;ll accept the fact that a person can
+be an alcoholic, a dope fiend, a wife beater, and even a newspaperman, but if a
+man doesn&#39;t drive, there is something wrong with him.  -- Art Buchwald
+</pre></div></content></entry><entry><author><name>Matthieu Moy</name><email>Matthieu.Moy@imag.fr</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-05T06:43:11Z</updated><link
+href="https://lore.kernel.org/git/vpqwsu2oyhj.fsf@bauges.imag.fr/"/><id>urn:uuid:633d7480-42ff-653c-0f4b-9db58ab3dd40</id><thr:in-reply-to
+ref="urn:uuid:8896caa1-2f5f-0c1c-4c5e-8f7bbd063520"
+href="https://lore.kernel.org/git/20071004161935.GC17487@fieldses.org/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">&#34;J. Bruce Fields&#34; &lt;bfields@fieldses.org&gt; writes:
+
+<span
+class="q">&gt;&gt; The stat-information, and sha1sum are actually a cache, but they don&#39;t
+&gt;&gt; have to be user-visible, except for speed.
+&gt;
+&gt; That&#39;s a big exception.--b.
+</span>
+Speed _is_ important, of course. But the user only benefits from
+speed, he doesn&#39;t have to manipulate it explicitely. I may be
+repeating myself, but &#34;diff --cached&#34; doesn&#39;t mean &#34;diff using the
+stat-cache&#34;, it means &#34;diff using the cached _content_&#34;, which is
+really unrelated from the stat-cache.
+
+Mercurial also has fast diff (perhaps a bit slower that git, but same
+order of magnitude), and has no user-visible index.
+
+-- 
+Matthieu
+</pre></div></content></entry><entry><author><name>Wincent Colaiuta</name><email>win@wincent.com</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-05T10:28:27Z</updated><link
+href="https://lore.kernel.org/git/0A7AA9C3-6D9E-4B14-822D-05232F0EAF99@wincent.com/"/><id>urn:uuid:5c469ee0-87a1-ecd3-2f18-d884bec8cb82</id><thr:in-reply-to
+ref="urn:uuid:68f739cb-52d8-fd7b-a622-a459ee218aa6"
+href="https://lore.kernel.org/git/buoejga14qg.fsf@dhapc248.dev.necel.com/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">El 5/10/2007, a las 7:59, Miles Bader escribi&#243;:
+
+<span
+class="q">&gt; Wincent Colaiuta &lt;win@wincent.com&gt; writes:
+&gt;&gt; You&#39;re probably right that the option name is confusing, I guess
+&gt;&gt; changing it to &#34;--index&#34; would be a good idea, continuing to support
+&gt;&gt; &#34;--cached&#34; but marking it as deprecated before finally removing it at
+&gt;&gt; some point in the future.
+&gt;
+&gt; Personally all I want is a short-option alias for --cached!
+&gt;
+&gt; Hopefully something easily type-able (not uppercase)...
+</span>
+Did you see the aliases I posted earlier in the thread? I can&#39;t think  
+of anything shorter or semantically clearer than &#34;staged&#34; and  
+&#34;unstaged&#34;.
+
+Cheers,
+Wincent
+</pre></div></content></entry><entry><author><name>Miles Bader</name><email>miles@gnu.org</email></author><title>Re: A few usability question about git diff --cached</title><updated>2007-10-05T10:41:50Z</updated><link
+href="https://lore.kernel.org/git/fc339e4a0710050341v11a7f9f7j3cf24403d2231886@mail.gmail.com/"/><id>urn:uuid:f74e38e1-ae71-106e-d633-eaddb97557d2</id><thr:in-reply-to
+ref="urn:uuid:5c469ee0-87a1-ecd3-2f18-d884bec8cb82"
+href="https://lore.kernel.org/git/0A7AA9C3-6D9E-4B14-822D-05232F0EAF99@wincent.com/"/><content
+type="xhtml"><div
+xmlns="http://www.w3.org/1999/xhtml"><pre
+style="white-space:pre-wrap">On 10/5/07, Wincent Colaiuta &lt;win@wincent.com&gt; wrote:
+<span
+class="q">&gt; &gt; Personally all I want is a short-option alias for --cached!
+&gt; &gt;
+&gt; &gt; Hopefully something easily type-able (not uppercase)...
+&gt;
+&gt; Did you see the aliases I posted earlier in the thread? I can&#39;t think
+&gt; of anything shorter or semantically clearer than &#34;staged&#34; and
+&gt; &#34;unstaged&#34;.
+</span>
+The words are ok, I guess, but aliases are not a replacement for short
+options.... really all frequently used, non-dangerous, options should
+have a short variant (and diff --cached meets both criteria handily)!
+
+-Miles
+-- 
+Do not taunt Happy Fun Ball.
+</pre></div></content></entry></feed>
